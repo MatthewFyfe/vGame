@@ -5,8 +5,9 @@ public class Spawning : MonoBehaviour {
 
 	//let unity editor decide what we will spawn
 	public GameObject whatToSpawn;
-	private int x_position = 5, y_position = 5;
+	private int x_position, y_position;
 	public float spawnInterval = 1;
+	public int spawnRadius = 100;
 	public bool isSpawning = true;
 
 	private int randomNum_perimiter, randomNum_wallPosition;
@@ -28,21 +29,23 @@ public class Spawning : MonoBehaviour {
 		 */
 
 		//define the rectangle spawn and choose the X/Y position to spawn inb (set range in game world which is 80x80)
-		randomNum_perimiter = Random.Range (0, 399);
-		randomNum_wallPosition = Random.Range (-50, 50);
+		randomNum_perimiter = Random.Range (0, spawnRadius);
+		//randomize along the length of one side of the rectangle
+		randomNum_wallPosition = Random.Range ((-1 * spawnRadius/2), spawnRadius/2);
 
-		//we defined the spawn zone as a 100x100 square. 0-99 is the north wall, 100-199 is east, 200-299 is south, 300-399 is west
-		if (randomNum_perimiter < 99) {
-			y_position = 50;
+		/*we defined the spawn zone as a square. the first quarter is the north wall(1/4), second quarter is east(2/4 or 1/2),
+		third quarter is south(3/4 or 0.75), fourth quarter is west */
+		if (randomNum_perimiter < spawnRadius/4) {
+			y_position = spawnRadius/2;
 			x_position = randomNum_wallPosition;
-		} else if (randomNum_perimiter < 199) {
-			x_position = 50;
+		} else if (randomNum_perimiter < spawnRadius/2) {
+			x_position = spawnRadius/2;
 			y_position = randomNum_wallPosition;
-		} else if (randomNum_perimiter < 299) {
-			y_position = -50;
+		} else if (randomNum_perimiter < spawnRadius * 0.75) {
+			y_position = -1 * spawnRadius/2;
 			x_position = randomNum_wallPosition;
 		} else {
-			x_position = -50;
+			x_position = -1 * spawnRadius/2;
 			y_position = randomNum_wallPosition;
 		}
 
