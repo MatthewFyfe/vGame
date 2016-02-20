@@ -46,12 +46,16 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\BulletHit.cs" />
      <Compile Include="Assets\Scripts\FaceMouse.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
+     <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\Helpers\ExposableMonobehavior.cs" />
      <Compile Include="Assets\Scripts\Helpers\ExposePropertyAttribute.cs" />
      <Compile Include="Assets\Scripts\LifeSpan.cs" />
      <Compile Include="Assets\Scripts\ShootBullets.cs" />
+     <Compile Include="Assets\Scripts\Spawning.cs" />
      <Compile Include="Assets\Scripts\bulletAI.cs" />
      <Compile Include="Assets\Scripts\followUnit.cs" />
      <Compile Include="Assets\Scripts\moveVBot.cs" />
