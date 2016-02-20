@@ -5,10 +5,13 @@ public class EnemyAI : MonoBehaviour {
 
 	private GameObject Player;
 	private float speed = 2.5f;
+	private Health health;
 
 	// Use this for initialization
 	void Start () {
 		Player = GameObject.FindGameObjectWithTag("Player");
+		health = transform.root.GetComponentInChildren<Health>();
+		health.onDeathEvent += OnDeath;
 	}
 	
 	// Update is called once per frame
@@ -24,5 +27,10 @@ public class EnemyAI : MonoBehaviour {
 
 		float distance = Time.deltaTime * speed;
 		transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, distance);
+	}
+
+	void OnDeath()
+	{
+		Destroy(gameObject);
 	}
 }
