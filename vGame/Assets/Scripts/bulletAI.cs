@@ -21,7 +21,8 @@ public class bulletAI : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D coll) 
 	{	
-		if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Bullet" && coll.gameObject.tag != "Obstacle") {
+		if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Bullet" && 
+		    coll.gameObject.tag != "Obstacle" && coll.gameObject.tag != "Skynet") {
 			
 			//Destroy(coll.gameObject);
 			
@@ -33,7 +34,7 @@ public class bulletAI : MonoBehaviour
 			//erase bullet
 			Destroy(gameObject);
 		}
-		if (coll.gameObject.tag == "Obstacle") {
+		if (coll.gameObject.tag == "Obstacle" || coll.gameObject.tag == "Skynet") {
 			Destroy(gameObject);
 		}
 	}
