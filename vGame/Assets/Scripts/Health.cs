@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 
+	public delegate void Delegate_OnDeath ();
+	
+	public event Delegate_OnDeath onDeathEvent;
+
 	public int currentHP, maxHP;
 	private float HP_DepleteTime = 1;
 	private bool isDraining = false;
@@ -20,7 +24,9 @@ public class Health : MonoBehaviour {
 			//play a death animation?
 
 			//poof it's gone
-			Destroy(gameObject);
+			//Destroy(gameObject);
+			if (onDeathEvent != null)
+				onDeathEvent ();
 		}
 
 		//if currentHP is > maxHP, deplete HP down to max
