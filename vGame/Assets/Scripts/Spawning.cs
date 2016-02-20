@@ -50,6 +50,6 @@ public class Spawning : MonoBehaviour {
 		}
 
 		//actually spawn it
-			Instantiate (whatToSpawn, new Vector3 (x_position, y_position, 0), new Quaternion (0, 0, 0, 0));
+			Instantiate (whatToSpawn, new Vector3 (x_position, y_position, -.5f), new Quaternion (0, 0, 0, 0));
 	}
 }

@@ -30,7 +30,7 @@ public class moveVBot : MonoBehaviour
 		}
 		 
 		Vector3 translationVector = new Vector3 (transform.position.x + translationX, 
-		                                         transform.position.y + translationY, 0);
+		                                         transform.position.y + translationY, transform.position.z);
 
 		transform.position = Vector3.MoveTowards (transform.position, translationVector, distance);
 	}
