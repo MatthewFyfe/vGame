@@ -32,19 +32,20 @@ public class Health : MonoBehaviour {
 		//if currentHP is > maxHP, deplete HP down to max
 		if (currentHP > maxHP && !isDraining) {
 			//runs the DepleteHP function once per second, starting immediately
-			InvokeRepeating ("DepleteHP", 0, HP_DepleteTime);
+			InvokeRepeating ("depleteHP", 0, HP_DepleteTime);
 			isDraining = true;
 		} 
 
 		//if currentHP is <= maxHP, stop draining (if it is)
 		if (currentHP <= maxHP && isDraining) {
 			//stop all invoke instances of DepleteHP
-			CancelInvoke("DepleteHP");
+			CancelInvoke("depleteHP");
 			isDraining = false;
 		}
 	}
-	
-	void takeDamage()
+
+	//TODO: make this run with takeDamage instaed, (doesnt work with invoke though)
+	void depleteHP()
 	{
 		currentHP -= 1;
 	}
