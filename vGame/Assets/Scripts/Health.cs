@@ -26,7 +26,7 @@ public class Health : MonoBehaviour {
 		//if currentHP is > maxHP, deplete HP down to max
 		if (currentHP > maxHP && !isDraining) {
 			//runs the DepleteHP function once per second, starting immediately
-			InvokeRepeating ("DepleteHP", 0, 1);
+			InvokeRepeating ("DepleteHP", 0, HP_DepleteTime);
 			isDraining = true;
 		} 
 
