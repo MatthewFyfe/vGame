@@ -4,7 +4,7 @@ using System.Collections;
 public class moveVBot : MonoBehaviour
 {
 	Vector3 VBot_position = new Vector3 ();
-	public int moveSpeed = 1; //VBots moveSpeed coefficient
+	public float moveSpeed = 5.0f; //VBots moveSpeed coefficient
 	
 	// Update is called once per frame
 	void Update ()
@@ -17,21 +17,24 @@ public class moveVBot : MonoBehaviour
 		float distance = Time.deltaTime * moveSpeed;
 
 		if (Input.GetKey (KeyCode.W)) {
-			translationY += distance;
+			translationY += 1;
 		}
 
 		if (Input.GetKey (KeyCode.A)) {
-			translationX -= distance;
+			translationX -= 1;
 		}
 
 		if (Input.GetKey (KeyCode.S)) {
-			translationY -= distance;
+			translationY -= 1;
 		}
 
 		if (Input.GetKey (KeyCode.D)) {
-			translationX += distance;
+			translationX += 1;
 		}
+		 
+		Vector3 translationVector = new Vector3 (transform.position.x + translationX, 
+		                                         transform.position.y + translationY, 0);
 
-		transform.position += new Vector3 (translationX, translationY, 0);
+		transform.position = Vector3.MoveTowards (transform.position, translationVector, distance);
 	}
 }
