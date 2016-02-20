@@ -38,8 +38,13 @@ public class Health : MonoBehaviour {
 		}
 	}
 	
-	void DepleteHP()
+	void takeDamage()
 	{
 		currentHP -= 1;
+	}
+
+	void takeDamage(int x)
+	{
+		currentHP -= x;
 	}
 }
