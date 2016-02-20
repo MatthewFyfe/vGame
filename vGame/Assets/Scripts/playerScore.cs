@@ -4,7 +4,7 @@ using System.Collections;
 
 public class playerScore : MonoBehaviour {
 
-	public int points = 0;
+	public static int points = 0;
 	float survivalTime;
 	int minutes, seconds;
 
@@ -27,11 +27,6 @@ public class playerScore : MonoBehaviour {
 		minutes = (int)survivalTime / 60;
 		seconds = (int)survivalTime % 60;
 		clockText.text = minutes.ToString("00") + ':' + seconds.ToString("00");
-	}
-
-	void addPoints(int pointsToAdd)
-	{
-		points += pointsToAdd;
 	}
 
 	void gameOver()
