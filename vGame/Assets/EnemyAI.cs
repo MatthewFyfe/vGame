@@ -9,7 +9,7 @@ public enum EnemyBehaviour {
 
 public class EnemyAI : MonoBehaviour {
 
-	public EnemyBehaviour behaviour = EnemyBehaviour.MoveToPlayer;
+	public EnemyBehaviour behaviour = EnemyBehaviour.MoveToClosest;
 
 	private GameObject Player;
 	private GameObject Skynet;
