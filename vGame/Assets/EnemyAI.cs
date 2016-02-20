@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour {
 	private float speed = 2.5f;
 	private Health health;
 
+	public int pointValue = 1;
+
 	// Use this for initialization
 	void Start () {
 		Player = GameObject.FindGameObjectWithTag("Player");
@@ -73,6 +75,8 @@ public class EnemyAI : MonoBehaviour {
 
 	void OnDeath()
 	{
+		//give the player who killed this enemy a point, and remove the enemy
+		playerScore.points += pointValue;
 		Destroy(gameObject);
 	}
 }
