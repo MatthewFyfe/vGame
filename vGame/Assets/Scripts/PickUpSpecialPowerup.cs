@@ -14,14 +14,16 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
-			Gun[] guns = player.GetComponentsInChildren<Gun>();
-			
-			foreach (Gun gun in guns) {
-				gun.RPMMultiplier += RPMMultIncrease;
+		if (player != null) {
+			if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
+				Gun[] guns = player.GetComponentsInChildren<Gun> ();
+				
+				foreach (Gun gun in guns) {
+					gun.RPMMultiplier += RPMMultIncrease;
+				}
+				
+				Destroy (gameObject);
 			}
-			
-			Destroy (gameObject);
 		}
 	}
 }
