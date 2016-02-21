@@ -24,6 +24,7 @@ public class BaseDestroyed : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		Time.timeScale = 1F;
 		health = transform.root.GetComponentInChildren<Health> ();
 		score = GameObject.Find ("HUD_Canvas").GetComponent<playerScore> ();
 		health.onDeathEvent += DestroyBase;
@@ -64,8 +65,9 @@ public class BaseDestroyed : MonoBehaviour
 
 	private void DestroyBase ()
 	{
+		Time.timeScale = 0.3F;
 		score.gameOver = true;
-		Invoke ("EndGame", 3.0f);
+		Invoke ("EndGame", 1f);
 		gameObject.SetActive (false);
 		// Destroy(gameObject);
 	}
@@ -74,5 +76,9 @@ public class BaseDestroyed : MonoBehaviour
 	{
 		GameOverScore.gameScore = score.points;
 		Application.LoadLevel ("GameOver");
+	}
+
+	public void ReturnToNormalTime() {
+		Time.timeScale = 1f;
 	}
 }
