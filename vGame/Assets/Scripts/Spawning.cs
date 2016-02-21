@@ -7,7 +7,7 @@ public class Spawning : MonoBehaviour
 	//let unity editor decide what we will spawn
 	public GameObject[] whatToSpawn;
 	private int spawnX, spawnY;
-	public float spawnInterval = 1;
+	private float spawnInterval;
 	public bool isSpawning = true;
 
 	public int height;
@@ -17,18 +17,28 @@ public class Spawning : MonoBehaviour
 	private float gameTime;
 	private ArrayList spawnWeights = new ArrayList ();
 	private float randomFloat; 
+	private float lastSpawnTime;
+	private float startingSpawnInterval = 1f;
 
 	// Use this for initialization
 	void Start ()
 	{
-		InvokeRepeating ("spawnAThing", 0, spawnInterval);
 		perimeter = 2 * width + 2 * height;
+		spawnInterval = startingSpawnInterval;
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		//check if isSpawning has been turned off (or on)
+		// Get time
+		gameTime = Time.timeSinceLevelLoad;
+		
+		// Spawn if its time
+		if (gameTime - lastSpawnTime > spawnInterval) {
+			spawnAThing ();
+			lastSpawnTime = gameTime;
+		} 
 	}
 
 	void spawnAThing ()
@@ -60,30 +70,29 @@ public class Spawning : MonoBehaviour
 
 	GameObject WhatToSpawn ()
 	{
-		// Get time
-		gameTime = Time.timeSinceLevelLoad;
+		
 
 		// Get weighted spawn table based on time/score
 		// Restrict spawn pool based on time
 		// Increase weighting towards more difficult types based on time
 		if (gameTime < 10) {
-			spawnInterval = 0.3f;
+			spawnInterval = startingSpawnInterval;
 			spawnWeights = new ArrayList{1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 		} else if (gameTime < 20) {
-			spawnInterval = 0.5f;
+			spawnInterval = 0.8f;
 			spawnWeights = new ArrayList{0.8f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f};
 		} else if (gameTime < 30) {
-			spawnInterval = 0.8f;
+			spawnInterval = 0.6f;
 			spawnWeights = new ArrayList{0.6f, 0.2f, 0.2f, 0.0f, 0.0f, 0.0f};
 		} else if (gameTime < 50) {
-			spawnInterval = 1f;
+			spawnInterval = 0.5f;
 			spawnWeights = new ArrayList{0.4f, 0.2f, 0.2f, 0.2f, 0.0f, 0.01f};
 		} else if (gameTime < 90) {
-			spawnInterval = 1f;
+			spawnInterval = 0.4f;
 			spawnWeights = new ArrayList{0.2f, 0.2f, 0.2f, 0.2f, 0.18f, 0.02f};
 		} else if (gameTime < 120) {
-			spawnInterval = 1f;
-			spawnWeights = new ArrayList{0.2f, 0.2f, 0.2f, 0.2f, 0.15f, 0.05f};
+			spawnInterval = 0.3f;
+			spawnWeights = new ArrayList{0.15f, 0.15f, 0.2f, 0.2f, 0.25f, 0.05f};
 		}
 
 		randomFloat = Random.Range (0.0f, 1.0f);
