@@ -13,13 +13,16 @@ public class Health : MonoBehaviour {
 
 	public float timeToFlash = -1;
 
-	private Color originalColor;
+	private Color[] originalColors;
 	private Renderer[] renderers;
 
 	// Use this for initialization
 	void Start () {
 		renderers = transform.root.GetComponentsInChildren<Renderer> ();
-		originalColor = renderers[0].material.color;
+		originalColors = new Color [renderers.Length];
+		for (int i = 0; i < renderers.Length; i++) {
+			originalColors[i] = renderers[i].material.color;
+		}
 	}
 	
 	// Update is called once per frame
@@ -50,9 +53,10 @@ public class Health : MonoBehaviour {
 
 		if (timeToFlash != -1) {
 			if (timeToFlash < Time.time) {
-				foreach (Renderer r in renderers) {
-					r.material.color = originalColor;
+				for (int i = 0; i < renderers.Length; i++) {
+					renderers[i].material.color = originalColors[i];
 				}
+				timeToFlash = -1;
 			}
 		}
 	}
