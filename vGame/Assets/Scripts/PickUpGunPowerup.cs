@@ -15,20 +15,22 @@ public class PickUpGunPowerup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
-			Gun[] guns = player.GetComponentsInChildren<Gun>();
+		if (player != null) {
+			if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
+				Gun[] guns = player.GetComponentsInChildren<Gun> ();
 
-			foreach (Gun gun in guns) {
-				gun.fireMode = powerGun.fireMode;
-				gun.bullet = powerGun.bullet;
-				gun.coneDegree = powerGun.coneDegree;
-				gun.RPM = powerGun.RPM;
-				gun.NumberOfBursts = powerGun.NumberOfBursts;
-				gun.TimeBetweenBursts = powerGun.TimeBetweenBursts;
-				gun.NumProjectilesFire = powerGun.NumProjectilesFire;
+				foreach (Gun gun in guns) {
+					gun.fireMode = powerGun.fireMode;
+					gun.bullet = powerGun.bullet;
+					gun.coneDegree = powerGun.coneDegree;
+					gun.RPM = powerGun.RPM;
+					gun.NumberOfBursts = powerGun.NumberOfBursts;
+					gun.TimeBetweenBursts = powerGun.TimeBetweenBursts;
+					gun.NumProjectilesFire = powerGun.NumProjectilesFire;
+				}
+
+				Destroy (gameObject);
 			}
-
-			Destroy (gameObject);
 		}
 	}
 }

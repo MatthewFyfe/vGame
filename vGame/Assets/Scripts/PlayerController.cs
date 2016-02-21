@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	private Health health;
+
+	public GameObject RespawnMarker;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Death() {
+		Transform playerTransform = transform;
+		Instantiate(RespawnMarker, playerTransform.position, playerTransform.rotation);
 		Destroy (gameObject);
 	}
 }

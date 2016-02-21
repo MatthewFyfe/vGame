@@ -47,6 +47,9 @@ public class EnemyAI : MonoBehaviour
 		switch (behaviour) {
 		case EnemyBehaviour.MoveToPlayer:
 			target = Player;
+			if (Player == null) {
+				target = Skynet;
+			}
 			break;
 		case EnemyBehaviour.MoveToBase:
 			target = Skynet;
@@ -105,7 +108,11 @@ public class EnemyAI : MonoBehaviour
 		if (playerDistance > skynetDistance) {
 			return Skynet;
 		} else {
-			return Player;
+			if (Player != null) {
+				return Player;
+			} else {
+				return Skynet;
+			}
 		}
 	}
 
