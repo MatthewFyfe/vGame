@@ -25,7 +25,10 @@ public class Spawning : MonoBehaviour
 	{
 		perimeter = 2 * width + 2 * height;
 		spawnInterval = startingSpawnInterval;
-		InvokeRepeating ("spawnAHacker", 1.0f, 30.0f);
+
+		var firstHackerSpawnTime = (float) Random.Range (15, 30);  // first hacker spawns after 15-30 seconds
+		var hackerSpawnInterval = 30.0f;                           // new hacker attempts to spawn every 30 seconds
+		InvokeRepeating ("spawnAHacker", firstHackerSpawnTime, hackerSpawnInterval);
 	}
 	
 	// Update is called once per frame
