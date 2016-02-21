@@ -41,6 +41,9 @@ public class SuicideBomb : MonoBehaviour {
 		BaseDestroyed baseDestroyed = skynet.GetComponent<BaseDestroyed>();
 
 		baseDestroyed.Invoke("ReturnToNormalTime", 0.2f);
+		GameObject cam = Camera.main.gameObject;
+		CameraShake camshake = cam.GetComponent<CameraShake> ();
+		camshake.shakeTime = 0.2f;
 		
 	}
 }

@@ -70,6 +70,9 @@ public class BaseDestroyed : MonoBehaviour
 		score.gameOver = true;
 		Invoke ("EndGame", 5f);
 		Instantiate(skynetExplosion, transform.position, skynetExplosion.transform.rotation);
+		GameObject cam = Camera.main.gameObject;
+		CameraShake camshake = cam.GetComponent<CameraShake> ();
+		camshake.shakeTime = 1f;
 		gameObject.SetActive (false);
 		// Destroy(gameObject);
 	}
