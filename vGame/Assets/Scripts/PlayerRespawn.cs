@@ -23,7 +23,7 @@ public class PlayerRespawn : MonoBehaviour {
 			player.transform.root.GetComponentInChildren<Health>().currentHP = 150;
 
 			if (respawnSound != null) {
-				player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (respawnSound);
+				Camera.main.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (respawnSound);
 			}
 
 			Destroy (gameObject);

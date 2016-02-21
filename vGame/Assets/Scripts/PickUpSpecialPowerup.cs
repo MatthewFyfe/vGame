@@ -19,7 +19,7 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 		if (player != null) {
 			if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
 				if (pickUpSound != null) {
-					player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (pickUpSound);
+					Camera.main.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (pickUpSound);
 				}
 
 				if (RPMMultIncrease > 0) {

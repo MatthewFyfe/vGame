@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Death() {
 		if (deathSound != null) {
-			transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (deathSound);
+			Camera.main.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (deathSound);
 		}
 
 		Transform playerTransform = transform;
