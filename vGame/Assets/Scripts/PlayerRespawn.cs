@@ -7,7 +7,7 @@ public class PlayerRespawn : MonoBehaviour {
 	private float TimeTillRespawn;
 
 	public GameObject respawnObject;
-	public GameObject 
+	public GameObject spawnEffects;
 	public AudioClip respawnSound;
 
 	// Use this for initialization
