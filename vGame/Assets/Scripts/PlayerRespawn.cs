@@ -7,6 +7,7 @@ public class PlayerRespawn : MonoBehaviour {
 	private float TimeTillRespawn;
 
 	public GameObject respawnObject;
+	public AudioClip respawnSound;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,11 @@ public class PlayerRespawn : MonoBehaviour {
 		if (TimeTillRespawn < Time.time) {
 			GameObject player = (GameObject)Instantiate(respawnObject, transform.position, transform.rotation);
 			player.transform.root.GetComponentInChildren<Health>().currentHP = 150;
+
+			if (respawnSound != null) {
+				player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (respawnSound);
+			}
+
 			Destroy (gameObject);
 		}
 	}

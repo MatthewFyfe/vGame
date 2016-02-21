@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public enum EnemyBehaviour
@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
 
 	private playerScore score;
 	private Animator humanAnimator;
+	public AudioClip deathSound;
 
 	// Use this for initialization
 	void Start ()
@@ -118,6 +119,9 @@ public class EnemyAI : MonoBehaviour
 
 	void OnDeath ()
 	{
+		if (deathSound != null && Player != null) {
+			Player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (deathSound);
+		}
 		//give the player who killed this enemy a point, and remove the enemy
 		score.points += pointValue;
 		Destroy (gameObject);

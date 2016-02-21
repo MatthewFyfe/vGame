@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 	private Health health;
 
 	public GameObject RespawnMarker;
+	public AudioClip deathSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Death() {
+		if (deathSound != null) {
+			transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (deathSound);
+		}
+
 		Transform playerTransform = transform;
 		Instantiate(RespawnMarker, playerTransform.position, playerTransform.rotation);
 		Destroy (gameObject);

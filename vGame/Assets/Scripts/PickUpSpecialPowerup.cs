@@ -7,6 +7,7 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 
 	public float RPMMultIncrease;
 	public float MovementSpeedIncrease;
+	public AudioClip pickUpSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -17,10 +18,15 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 	void Update () {
 		if (player != null) {
 			if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
-				Gun[] guns = player.GetComponentsInChildren<Gun> ();
-				
-				foreach (Gun gun in guns) {
-					gun.RPMMultiplier += RPMMultIncrease;
+				if (pickUpSound != null) {
+					player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (pickUpSound);
+				}
+
+				if (RPMMultIncrease > 0) {
+					Gun[] guns = player.GetComponentsInChildren<Gun> ();
+					foreach (Gun gun in guns) {
+						gun.RPMMultiplier += RPMMultIncrease;
+					}
 				}
 
 				if (MovementSpeedIncrease > 0) {
