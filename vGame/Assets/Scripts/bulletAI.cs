@@ -3,7 +3,8 @@ using System.Collections;
 
 public enum BulletType {
 	Friendly,
-	Hostile
+	Hostile,
+	Neutral
 }
 
 public class bulletAI : MonoBehaviour
@@ -23,17 +24,18 @@ public class bulletAI : MonoBehaviour
 	{	
 		if (coll.gameObject.tag == "Bullet") { 
 
-		}
-		else if (coll.gameObject.tag == "Obstacle") {
+		} else if (coll.gameObject.tag == "Obstacle") {
 			collide (coll);
 		} else if (bulletType == BulletType.Friendly) {
 			if (coll.gameObject.tag == "Enemy") {
 				collide (coll);
 			}
-		} else {
+		} else if (bulletType == BulletType.Hostile) {
 			if (coll.gameObject.tag != "Enemy") {
 				collide (coll);
 			}
+		} else {
+			collide (coll);
 		}
 	}
 
