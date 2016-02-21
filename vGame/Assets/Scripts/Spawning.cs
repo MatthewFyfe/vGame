@@ -25,7 +25,7 @@ public class Spawning : MonoBehaviour
 	{
 		perimeter = 2 * width + 2 * height;
 		spawnInterval = startingSpawnInterval;
-
+		InvokeRepeating ("spawnAHacker", 1.0f, 30.0f);
 	}
 	
 	// Update is called once per frame
@@ -66,6 +66,32 @@ public class Spawning : MonoBehaviour
 		
 		//actually spawn it
 		Instantiate (WhatToSpawn (), new Vector3 (spawnX, spawnY, 0), new Quaternion (0, 0, 0, 0));
+	}
+
+	void spawnAHacker() {
+		GameObject existingHacker = GameObject.Find ("The Hacker");
+
+		if (existingHacker == null) {
+			randomPerimeterDistance = Random.Range (0, perimeter);
+			if (randomPerimeterDistance < width) {
+				spawnY = height / 2;
+				spawnX = (randomPerimeterDistance) - width / 2;
+			} else if ((randomPerimeterDistance - width) < height) {
+				spawnX = width / 2;
+				spawnY = (randomPerimeterDistance - width) - height / 2;
+			} else if ((randomPerimeterDistance - width - height) < width) {
+				spawnY = -height / 2;
+				spawnX = (randomPerimeterDistance - width - height) - width / 2;
+			} else {
+				spawnX = -width / 2;
+				spawnY = (randomPerimeterDistance - width * 2 - height) - height / 2;
+			}
+
+			//actually spawn it
+			GameObject hacker = (GameObject)Resources.Load ("Hacker Enemy");
+			hacker.name = "The Hacker";
+			Instantiate (hacker, new Vector3 (spawnX, spawnY, 0), new Quaternion (0, 0, 0, 0));
+		}
 	}
 
 	GameObject WhatToSpawn ()
