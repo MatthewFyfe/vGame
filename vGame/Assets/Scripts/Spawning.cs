@@ -14,6 +14,9 @@ public class Spawning : MonoBehaviour
 	public int width;
 	private int perimeter;
 	private int randomPerimeterDistance;
+	private float gameTime;
+	private ArrayList spawnWeights = new ArrayList ();
+	private float randomFloat; 
 
 	// Use this for initialization
 	void Start ()
@@ -57,6 +60,44 @@ public class Spawning : MonoBehaviour
 
 	GameObject WhatToSpawn ()
 	{
-		return whatToSpawn [Random.Range (0, whatToSpawn.Length)];
+		// Get time
+		gameTime = Time.timeSinceLevelLoad;
+
+		// Get weighted spawn table based on time/score
+		// Restrict spawn pool based on time
+		// Increase weighting towards more difficult types based on time
+		if (gameTime < 10) {
+			spawnInterval = 0.3f;
+			spawnWeights = new ArrayList{1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+		} else if (gameTime < 20) {
+			spawnInterval = 0.5f;
+			spawnWeights = new ArrayList{0.8f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f};
+		} else if (gameTime < 30) {
+			spawnInterval = 0.8f;
+			spawnWeights = new ArrayList{0.6f, 0.2f, 0.2f, 0.0f, 0.0f, 0.0f};
+		} else if (gameTime < 50) {
+			spawnInterval = 1f;
+			spawnWeights = new ArrayList{0.4f, 0.2f, 0.2f, 0.2f, 0.0f, 0.01f};
+		} else if (gameTime < 90) {
+			spawnInterval = 1f;
+			spawnWeights = new ArrayList{0.2f, 0.2f, 0.2f, 0.2f, 0.18f, 0.02f};
+		} else if (gameTime < 120) {
+			spawnInterval = 1f;
+			spawnWeights = new ArrayList{0.2f, 0.2f, 0.2f, 0.2f, 0.15f, 0.05f};
+		}
+
+		randomFloat = Random.Range (0.0f, 1.0f);
+		int i;
+		for (i = 0; i <= spawnWeights.Count; i++) {
+			if (randomFloat < (float)spawnWeights[i]) {
+				break;
+			} else {
+				randomFloat -= (float)spawnWeights[i];
+			}
+		}
+
+
+		// Return random spawn from that table
+		return whatToSpawn [i];
 	}
 }
