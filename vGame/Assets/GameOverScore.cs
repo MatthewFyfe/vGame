@@ -6,10 +6,11 @@ public class GameOverScore : MonoBehaviour {
 
 	public static int gameScore;
 
-	public bool isHighScore = false;
-
 	// Use this for initialization
 	void Start () {
+		var highScoreObject = GameObject.Find ("HighScoreText");
+		highScoreObject.SetActive(false);
+
 		var scoreText = GameObject.Find ("ScoreText").GetComponent<Text>();
 		scoreText.text = "Score: " + gameScore;
 
@@ -19,9 +20,9 @@ public class GameOverScore : MonoBehaviour {
 		}
 
 		if (gameScore > currentHighScore) {
-			isHighScore = true;
 			PlayerPrefs.SetInt("HighScore", gameScore);
 			PlayerPrefs.Save();
+			highScoreObject.SetActive(true);
 		}
 	}
 	
