@@ -11,14 +11,19 @@ public class Health : MonoBehaviour {
 	private float HP_DepleteTime = 1;
 	private bool isDraining = false;
 
+	public float timeToFlash = -1;
+
+	private Color originalColor;
+	private Renderer[] renderers;
+
 	// Use this for initialization
 	void Start () {
-
+		renderers = transform.root.GetComponentsInChildren<Renderer> ();
+		originalColor = renderers[0].material.color;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		//if currentHP is zero (or lower) kill the gameObject
 		if (currentHP <= 0) {
 			//play a death animation?
@@ -42,6 +47,14 @@ public class Health : MonoBehaviour {
 			CancelInvoke("depleteHP");
 			isDraining = false;
 		}
+
+		if (timeToFlash != -1) {
+			if (timeToFlash < Time.time) {
+				foreach (Renderer r in renderers) {
+					r.material.color = originalColor;
+				}
+			}
+		}
 	}
 
 	//TODO: make this run with takeDamage instaed, (doesnt work with invoke though)
@@ -53,5 +66,15 @@ public class Health : MonoBehaviour {
 	void takeDamage(int x)
 	{
 		currentHP -= x;
+
+		Flasher(); 
+	}
+
+	void Flasher() 
+	{
+		foreach (Renderer r in renderers) {
+			r.material.color = Color.red;
+		}
+		timeToFlash = Time.time + 0.05f;
 	}
 }
