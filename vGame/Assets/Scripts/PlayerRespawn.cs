@@ -7,9 +7,11 @@ public class PlayerRespawn : MonoBehaviour {
 	private float TimeTillRespawn;
 
 	public GameObject respawnObject;
+	public GameObject spawnEffects;
 
 	// Use this for initialization
 	void Start () {
+		Instantiate(spawnEffects, transform.position, spawnEffects.transform.rotation);
 		TimeTillRespawn = Time.time + respawnDelay;
 	}
 	
