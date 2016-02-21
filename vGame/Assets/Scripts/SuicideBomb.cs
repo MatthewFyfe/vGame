@@ -37,5 +37,10 @@ public class SuicideBomb : MonoBehaviour {
 
 	void Death(){
 		Instantiate (bomb, transform.position, transform.rotation);
+		Time.timeScale = 0.5f;
+		BaseDestroyed baseDestroyed = skynet.GetComponent<BaseDestroyed>();
+
+		baseDestroyed.Invoke("ReturnToNormalTime", 0.2f);
+		
 	}
 }
