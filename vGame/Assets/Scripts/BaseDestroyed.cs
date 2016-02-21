@@ -21,7 +21,8 @@ public class BaseDestroyed : MonoBehaviour {
 	{
 		score.gameOver = true;
 		Invoke("EndGame", 3.0f);
-		Destroy(gameObject);
+		gameObject.SetActive(false);
+		// Destroy(gameObject);
 	}
 
 	private void EndGame()
