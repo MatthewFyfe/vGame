@@ -66,9 +66,9 @@ public class BaseDestroyed : MonoBehaviour
 
 	private void DestroyBase ()
 	{
-		Time.timeScale = 0.3F;
+		Time.timeScale = 0.5F;
 		score.gameOver = true;
-		Invoke ("EndGame", 1f);
+		Invoke ("EndGame", 5f);
 		Instantiate(skynetExplosion, transform.position, skynetExplosion.transform.rotation);
 		gameObject.SetActive (false);
 		// Destroy(gameObject);
