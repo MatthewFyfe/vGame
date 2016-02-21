@@ -11,8 +11,7 @@ public class Health : MonoBehaviour {
 	private float HP_DepleteTime = 1;
 	private bool isDraining = false;
 
-	public float timeToFlash = -1;
-
+	private float timeToFlash = -1;
 	private Color[] originalColors;
 	private Renderer[] renderers;
 

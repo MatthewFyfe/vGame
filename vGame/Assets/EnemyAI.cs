@@ -52,7 +52,9 @@ public class EnemyAI : MonoBehaviour {
 		if (target != null) {
 			MoveToUnit ();
 			float distanceFromTarget = Vector3.Distance (transform.position, target.transform.position);
-			gun.isShooting = distanceFromTarget <= shootingDistance;
+			if (gun != null) {
+				gun.isShooting = distanceFromTarget <= shootingDistance;
+			}
 		}
 	}
 
