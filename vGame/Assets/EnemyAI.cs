@@ -10,7 +10,6 @@ public enum EnemyBehaviour
 
 public class EnemyAI : MonoBehaviour
 {
-
 	public EnemyBehaviour behaviour = EnemyBehaviour.MoveToClosest;
 	public int preferredDistance = 10;
 	public int shootingDistance = 15;
@@ -119,7 +118,7 @@ public class EnemyAI : MonoBehaviour
 
 	void OnDeath ()
 	{
-		if (deathSound != null && Player != null) {
+		if (deathSound.Length > 0 && Player != null) {
 			Player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (
 				deathSound[Random.Range (0, deathSound.Length)]
 			);
