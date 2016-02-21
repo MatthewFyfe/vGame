@@ -14,6 +14,7 @@ public class BaseDestroyed : MonoBehaviour
 
 	private Health health;
 	private playerScore score;
+	public GameObject skynetExplosion;
 	public GameObject Fire;
 	public GameObject[] ThreeQuarterDamage;
 	public GameObject[] HalfDamage;
@@ -68,6 +69,7 @@ public class BaseDestroyed : MonoBehaviour
 		Time.timeScale = 0.3F;
 		score.gameOver = true;
 		Invoke ("EndGame", 1f);
+		Instantiate(skynetExplosion, transform.position, skynetExplosion.transform.rotation);
 		gameObject.SetActive (false);
 		// Destroy(gameObject);
 	}
