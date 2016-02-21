@@ -6,6 +6,7 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 	private GameObject player;
 
 	public float RPMMultIncrease;
+	public float MovementSpeedIncrease;
 	
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,10 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 				
 				foreach (Gun gun in guns) {
 					gun.RPMMultiplier += RPMMultIncrease;
+				}
+
+				if (MovementSpeedIncrease > 0) {
+					player.transform.root.GetComponentInChildren<moveVBot>().moveSpeed += MovementSpeedIncrease;
 				}
 				
 				Destroy (gameObject);
