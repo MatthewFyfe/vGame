@@ -30,22 +30,25 @@ public class Spawning : MonoBehaviour
 
 	void spawnAThing ()
 	{
-		/*Possible Improvement: define '399' as RectanglePerimeter and define the 4 IF blocks as perimiter/4, p/3, p/2, p
-		 * This would allow dynamically changing the spawn rectangle size
+		/*
+		 * Generates a random number that represents a point on the perimeter
+		 * Selects the side of the spawn perimeter based on how far along on the perimeter that point is
+		 * Fixes the X or Y value to that wall's value
+		 * Calculates the other dimension by finding the distance along that wall and offsetting it
 		 */
 		randomPerimeterDistance = Random.Range (0, perimeter);
 		if (randomPerimeterDistance < width) {
 			spawnY = height / 2;
-			spawnX = randomPerimeterDistance;
+			spawnX = (randomPerimeterDistance) - width/2;
 		} else if ((randomPerimeterDistance - width) < height) {
 			spawnX = width / 2;
-			spawnY = randomPerimeterDistance - width;
+			spawnY = (randomPerimeterDistance - width) - height/2;
 		} else if ((randomPerimeterDistance - width - height) < width) {
 			spawnY = -height / 2;
-			spawnX = randomPerimeterDistance - width - height;
+			spawnX = (randomPerimeterDistance - width - height) - width/2;
 		} else {
 			spawnX = -width / 2;
-			spawnY = randomPerimeterDistance - width * 2 - height;
+			spawnY = (randomPerimeterDistance - width * 2 - height) - height/2;
 		}
 		
 		//actually spawn it
