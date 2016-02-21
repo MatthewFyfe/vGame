@@ -27,7 +27,7 @@ public class BaseDestroyed : MonoBehaviour {
 
 	private void EndGame()
 	{
-		// TODO save high score
+		GameOverScore.gameScore = score.points;
 		Application.LoadLevel ("GameOver");
 	}
 }
