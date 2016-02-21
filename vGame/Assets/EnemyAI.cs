@@ -26,7 +26,7 @@ public class EnemyAI : MonoBehaviour
 
 	private playerScore score;
 	private Animator humanAnimator;
-	public AudioClip deathSound;
+	public AudioClip[] deathSound;
 
 	// Use this for initialization
 	void Start ()
@@ -120,7 +120,9 @@ public class EnemyAI : MonoBehaviour
 	void OnDeath ()
 	{
 		if (deathSound != null && Player != null) {
-			Player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (deathSound);
+			Player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (
+				deathSound[Random.Range (0, deathSound.Length)]
+			);
 		}
 		//give the player who killed this enemy a point, and remove the enemy
 		score.points += pointValue;
