@@ -22,6 +22,8 @@ public class EnemyAI : MonoBehaviour {
 	private Gun gun;
 	private GameObject target;
 
+	private playerScore score;
+
 	// Use this for initialization
 	void Start () {
 		Player = GameObject.FindGameObjectWithTag("Player");
@@ -29,6 +31,7 @@ public class EnemyAI : MonoBehaviour {
 		gun = transform.root.GetComponentInChildren<Gun>();
 		health = transform.root.GetComponentInChildren<Health>();
 		health.onDeathEvent += OnDeath;
+		score = GameObject.Find ("HUD_Canvas").GetComponent<playerScore> ();
 	}
 	
 	// Update is called once per frame
@@ -90,7 +93,7 @@ public class EnemyAI : MonoBehaviour {
 	void OnDeath()
 	{
 		//give the player who killed this enemy a point, and remove the enemy
-		playerScore.points += pointValue;
+		score.points += pointValue;
 		Destroy(gameObject);
 	}
 }
