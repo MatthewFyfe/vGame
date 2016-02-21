@@ -31,10 +31,13 @@ public class PowerUpSpawn : MonoBehaviour {
 			}
 
 			if (PowerUp != null) {
-				Vector3 spawn = Skynet.transform.position + new Vector3(
-					Random.Range(-spawnRadius, spawnRadius + 1) + 3,
-					Random.Range(-spawnRadius, spawnRadius + 1) + 3,
-					0);
+				float angle = Random.Range(0.0f,Mathf.PI*2); 
+				
+				// create a vector with length 1.0
+				Vector3 spawn = new Vector3(Mathf.Sin(angle),Mathf.Cos(angle), 0);
+				
+				// scale it to the desired length
+				spawn *= Random.Range(2, spawnRadius);
 				
 				Instantiate(PowerUp, spawn, PowerUp.transform.rotation);
 			}
