@@ -155,7 +155,7 @@ public class Gun : ExposableMonobehaviour
 	private void Fire ()
 	{
 		if (gunShotSound != null) {
-			transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (gunShotSound);
+			Camera.main.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (gunShotSound);
 		}
 		for (int i = 0; i < NumProjectilesFire; i++) {
 			

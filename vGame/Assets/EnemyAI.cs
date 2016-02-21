@@ -118,8 +118,8 @@ public class EnemyAI : MonoBehaviour
 
 	void OnDeath ()
 	{
-		if (deathSound.Length > 0 && Player != null) {
-			Player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (
+		if (deathSound.Length > 0) {
+			Camera.main.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (
 				deathSound[Random.Range (0, deathSound.Length)]
 			);
 		}

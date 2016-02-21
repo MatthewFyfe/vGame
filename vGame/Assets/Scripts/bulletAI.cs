@@ -30,6 +30,9 @@ public class bulletAI : MonoBehaviour
 			if (coll.gameObject.tag == "Enemy") {
 				collide (coll);
 			}
+			else if (coll.gameObject.tag == "Skynet"){
+				Destroy(gameObject);
+			}
 		} else if (bulletType == BulletType.Hostile) {
 			if (coll.gameObject.tag != "Enemy") {
 				collide (coll);
