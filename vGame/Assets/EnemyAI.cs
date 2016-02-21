@@ -13,15 +13,13 @@ public class EnemyAI : MonoBehaviour {
 	public int preferredDistance = 10;
 	public int shootingDistance = 15;
 	public bool runsFromPlayer = false;
+	public float speed = 2.5f;
+	public int pointValue = 1;
 
 	private GameObject Player;
 	private GameObject Skynet;
-	private float speed = 2.5f;
 	private Health health;
-
 	private Gun gun;
-
-	public int pointValue = 1;
 	private GameObject target;
 
 	// Use this for initialization
