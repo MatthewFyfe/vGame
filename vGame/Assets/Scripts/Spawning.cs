@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spawning : MonoBehaviour {
+public class Spawning : MonoBehaviour
+{
 
 	//let unity editor decide what we will spawn
 	public GameObject[] whatToSpawn;
@@ -15,17 +16,19 @@ public class Spawning : MonoBehaviour {
 	private int randomPerimeterDistance;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		InvokeRepeating ("spawnAThing", 0, spawnInterval);
 		perimeter = 2 * width + 2 * height;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		//check if isSpawning has been turned off (or on)
 	}
 
-	void spawnAThing()
+	void spawnAThing ()
 	{
 		/*Possible Improvement: define '399' as RectanglePerimeter and define the 4 IF blocks as perimiter/4, p/3, p/2, p
 		 * This would allow dynamically changing the spawn rectangle size
@@ -44,15 +47,13 @@ public class Spawning : MonoBehaviour {
 			spawnX = -width / 2;
 			spawnY = randomPerimeterDistance - width * 2 - height;
 		}
-
-		Debug.Log (randomPerimeterDistance);
-		Debug.Log (spawnX);
-		Debug.Log (spawnY);
+		
 		//actually spawn it
-		Instantiate (WhatToSpawn(), new Vector3 (spawnX, spawnY, -.5f), new Quaternion (0, 0, 0, 0));
+		Instantiate (WhatToSpawn (), new Vector3 (spawnX, spawnY, 0), new Quaternion (0, 0, 0, 0));
 	}
 
-	GameObject WhatToSpawn() {
-		return whatToSpawn[Random.Range(0, whatToSpawn.Length)];
+	GameObject WhatToSpawn ()
+	{
+		return whatToSpawn [Random.Range (0, whatToSpawn.Length)];
 	}
 }

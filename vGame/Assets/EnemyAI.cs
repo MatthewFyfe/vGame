@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum EnemyBehaviour {
+public enum EnemyBehaviour
+{
 	MoveToPlayer,
 	MoveToBase,
 	MoveToClosest
 }
 
-public class EnemyAI : MonoBehaviour {
+public class EnemyAI : MonoBehaviour
+{
 
 	public EnemyBehaviour behaviour = EnemyBehaviour.MoveToClosest;
 	public int preferredDistance = 10;
@@ -23,19 +25,24 @@ public class EnemyAI : MonoBehaviour {
 	private GameObject target;
 
 	private playerScore score;
+	private Animator humanAnimator;
 
 	// Use this for initialization
-	void Start () {
-		Player = GameObject.FindGameObjectWithTag("Player");
-		Skynet = GameObject.FindGameObjectWithTag("Skynet");
-		gun = transform.root.GetComponentInChildren<Gun>();
-		health = transform.root.GetComponentInChildren<Health>();
+	void Start ()
+	{
+		Player = GameObject.FindGameObjectWithTag ("Player");
+		Skynet = GameObject.FindGameObjectWithTag ("Skynet");
+		gun = transform.root.GetComponentInChildren<Gun> ();
+		health = transform.root.GetComponentInChildren<Health> ();
+		humanAnimator = transform.root.GetComponentInChildren<Animator> ();
 		health.onDeathEvent += OnDeath;
 		score = GameObject.Find ("HUD_Canvas").GetComponent<playerScore> ();
+		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 		switch (behaviour) {
 		case EnemyBehaviour.MoveToPlayer:
@@ -51,6 +58,7 @@ public class EnemyAI : MonoBehaviour {
 
 		if (target != null) {
 			MoveToUnit ();
+			
 			float distanceFromTarget = Vector3.Distance (transform.position, target.transform.position);
 			if (gun != null) {
 				gun.isShooting = distanceFromTarget <= shootingDistance;
@@ -58,22 +66,31 @@ public class EnemyAI : MonoBehaviour {
 		}
 	}
 
-	void MoveToUnit(){
+	void MoveToUnit ()
+	{
 		// Set the rotation
-		float rotation = Mathf.Atan2( target.transform.position.y - transform.position.y,
-		                             target.transform.position.x - transform.position.x ) * Mathf.Rad2Deg - 90;
-		transform.eulerAngles = new Vector3( 0, 0, rotation );
+		float rotation = Mathf.Atan2 (target.transform.position.y - transform.position.y,
+		                             target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90;
+		transform.eulerAngles = new Vector3 (0, 0, rotation);
 
 		float distance = Time.deltaTime * speed;
 		float distanceFromTarget = Vector3.Distance (transform.position, target.transform.position);
 		if (distanceFromTarget >= preferredDistance) {
+			if (humanAnimator != null) {
+				humanAnimator.SetBool ("isMoving", true);
+			}
 			transform.position = Vector3.MoveTowards (transform.position, target.transform.position, distance);
 		} else if (runsFromPlayer) {
 			transform.position = Vector3.MoveTowards (transform.position, target.transform.position, -distance);
+		} else {
+			if (humanAnimator != null) {
+				humanAnimator.SetBool ("isMoving", false);
+			}
 		}
 	}
 
-	GameObject DetermineClosestUnit(){
+	GameObject DetermineClosestUnit ()
+	{
 		Vector3 playerPosition, skynetPostion;
 		float playerDistance = 0, skynetDistance = 0;
 		if (Player != null) {
@@ -92,10 +109,10 @@ public class EnemyAI : MonoBehaviour {
 		}
 	}
 
-	void OnDeath()
+	void OnDeath ()
 	{
 		//give the player who killed this enemy a point, and remove the enemy
 		score.points += pointValue;
-		Destroy(gameObject);
+		Destroy (gameObject);
 	}
 }
