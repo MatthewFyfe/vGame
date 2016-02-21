@@ -8,6 +8,8 @@ public class HackerHacking : MonoBehaviour {
 	private GameObject Player;
 	private GameObject Skynet;
 	private Health hackerHealth;
+
+	public AudioClip hackingSound;
 	
 	void Start ()
 	{
@@ -22,7 +24,13 @@ public class HackerHacking : MonoBehaviour {
 	{
 		if (Skynet != null  && Player != null) {
 			if (Vector3.Distance (transform.position, Skynet.transform.position) <= hackingDistance) {
-				Player.GetComponent<moveVBot>().isBeingHacked = true;
+				moveVBot move = GetComponent<moveVBot>();
+				if (move.isBeingHacked == false) {
+					move.isBeingHacked = true;
+					if (hackingSound != null) {
+						Camera.main.transform.root.GetComponentInChildren<AudioSource>().PlayOneShot(hackingSound);
+					}
+				}
 			}
 		}
 	}
