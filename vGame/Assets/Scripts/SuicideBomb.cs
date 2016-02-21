@@ -22,8 +22,14 @@ public class SuicideBomb : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		playerInRange = Vector3.Distance (transform.position, player.transform.position) <= suicideDistance;
-		skynetInRange = Vector3.Distance (transform.position, skynet.transform.position) <= suicideDistance;
+		playerInRange = false;
+		if (player != null) {
+			playerInRange = Vector3.Distance (transform.position, player.transform.position) <= suicideDistance;
+		}
+		skynetInRange = false;
+		if (skynet != null) {
+			skynetInRange = Vector3.Distance (transform.position, skynet.transform.position) <= suicideDistance;
+		}
 		if (playerInRange || skynetInRange) {
 			health.SendMessage("takeDamage", health.currentHP);
 		}

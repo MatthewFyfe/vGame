@@ -70,7 +70,7 @@ public class Gun : ExposableMonobehaviour
 	
 	[ExposeProperty]
 	public int NumProjectilesFire {
-		set { _numProjectilesFire = Mathf.Max (value, 1); }
+		set { _numProjectilesFire = value; }
 		get { return _numProjectilesFire; }
 	}
 	
