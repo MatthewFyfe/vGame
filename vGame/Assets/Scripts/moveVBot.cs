@@ -4,6 +4,7 @@ using System.Collections;
 public class moveVBot : MonoBehaviour
 {
 	public float moveSpeed = 5.0f; //VBots moveSpeed coefficient
+	public bool isBeingHacked = false;
 	
 	// Update is called once per frame
 	void Update ()
@@ -13,20 +14,22 @@ public class moveVBot : MonoBehaviour
 		float translationY = 0;
 		float distance = Time.deltaTime * moveSpeed;
 
+		var direction = (isBeingHacked ? -1 : 1);
+
 		if (Input.GetKey (KeyCode.W)) {
-			translationY += 1;
+			translationY += direction;
 		}
 
 		if (Input.GetKey (KeyCode.A)) {
-			translationX -= 1;
+			translationX -= direction;
 		}
 
 		if (Input.GetKey (KeyCode.S)) {
-			translationY -= 1;
+			translationY -= direction;
 		}
 
 		if (Input.GetKey (KeyCode.D)) {
-			translationX += 1;
+			translationX += direction;
 		}
 		 
 		Vector3 translationVector = new Vector3 (transform.position.x + translationX, 

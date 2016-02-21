@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PickUpGunPowerup : MonoBehaviour {
@@ -6,6 +6,8 @@ public class PickUpGunPowerup : MonoBehaviour {
 	private Gun powerGun;
 	private float pickUpDistance = 1;
 	private GameObject player;
+
+	public AudioClip pickUpSound;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +19,10 @@ public class PickUpGunPowerup : MonoBehaviour {
 	void Update () {
 		if (player != null) {
 			if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
+				if (pickUpSound != null) {
+					player.transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (pickUpSound);
+				}
+
 				Gun[] guns = player.GetComponentsInChildren<Gun> ();
 
 				foreach (Gun gun in guns) {
@@ -27,6 +33,7 @@ public class PickUpGunPowerup : MonoBehaviour {
 					gun.NumberOfBursts = powerGun.NumberOfBursts;
 					gun.TimeBetweenBursts = powerGun.TimeBetweenBursts;
 					gun.NumProjectilesFire = powerGun.NumProjectilesFire;
+					gun.gunShotSound = powerGun.gunShotSound;
 				}
 
 				Destroy (gameObject);
