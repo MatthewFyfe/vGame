@@ -6,6 +6,7 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 	private GameObject player;
 
 	public float RPMMultIncrease;
+	public float MovementSpeedIncrease;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,14 +15,20 @@ public class PickUpSpecialPowerup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
-			Gun[] guns = player.GetComponentsInChildren<Gun>();
-			
-			foreach (Gun gun in guns) {
-				gun.RPMMultiplier += RPMMultIncrease;
+		if (player != null) {
+			if (Vector3.Distance (transform.position, player.transform.position) <= pickUpDistance) {
+				Gun[] guns = player.GetComponentsInChildren<Gun> ();
+				
+				foreach (Gun gun in guns) {
+					gun.RPMMultiplier += RPMMultIncrease;
+				}
+
+				if (MovementSpeedIncrease > 0) {
+					player.transform.root.GetComponentInChildren<moveVBot>().moveSpeed += MovementSpeedIncrease;
+				}
+				
+				Destroy (gameObject);
 			}
-			
-			Destroy (gameObject);
 		}
 	}
 }
