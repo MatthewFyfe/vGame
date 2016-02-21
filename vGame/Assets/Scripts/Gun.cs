@@ -85,7 +85,9 @@ public class Gun : ExposableMonobehaviour
 		set { }
 		get { return _isBursting; }
 	}
-	
+
+	public AudioClip gunShotSound;
+
 	//Private vars
 	private float shootTime;
 	private bool semiAutoFired;
@@ -152,6 +154,9 @@ public class Gun : ExposableMonobehaviour
 	
 	private void Fire ()
 	{
+		if (gunShotSound != null) {
+			transform.root.GetComponentInChildren<AudioSource> ().PlayOneShot (gunShotSound);
+		}
 		for (int i = 0; i < NumProjectilesFire; i++) {
 			
 			Quaternion spawnRot = spawnLocation.transform.rotation;
