@@ -36,6 +36,8 @@ public class HackerHacking : MonoBehaviour {
 	}
 
 	void StopHacking() {
-		Player.GetComponent<moveVBot>().isBeingHacked = false;
+		if (Player != null) {
+			Player.GetComponent<moveVBot> ().isBeingHacked = false;
+		}
 	}
 }

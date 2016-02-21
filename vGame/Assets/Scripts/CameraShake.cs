@@ -22,9 +22,6 @@ public class CameraShake : MonoBehaviour
 	{
 		if (shakeTime > 0)
 		{
-			Debug.Log(originalPos);
-			Debug.Log(Random.insideUnitSphere * shakeAmount);
-
 			transform.position = originalPos + Random.insideUnitSphere * shakeAmount * Random.Range(0.2f, 0.8f);
 			
 			shakeTime -= Time.deltaTime * decreaseFactor;
