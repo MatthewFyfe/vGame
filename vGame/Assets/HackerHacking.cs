@@ -24,7 +24,7 @@ public class HackerHacking : MonoBehaviour {
 	{
 		if (Skynet != null  && Player != null) {
 			if (Vector3.Distance (transform.position, Skynet.transform.position) <= hackingDistance) {
-				moveVBot move = GetComponent<moveVBot>();
+				moveVBot move = Player.transform.root.GetComponent<moveVBot>();
 				if (move.isBeingHacked == false) {
 					move.isBeingHacked = true;
 					if (hackingSound != null) {
