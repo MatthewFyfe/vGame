@@ -4,7 +4,7 @@ using System.Collections;
 public class Spawning : MonoBehaviour {
 
 	//let unity editor decide what we will spawn
-	public GameObject whatToSpawn;
+	public GameObject[] whatToSpawn;
 	private int x_position, y_position;
 	public float spawnInterval = 1;
 	public int spawnRadius = 100;
@@ -50,6 +50,10 @@ public class Spawning : MonoBehaviour {
 		}
 
 		//actually spawn it
-			Instantiate (whatToSpawn, new Vector3 (x_position, y_position, -.5f), new Quaternion (0, 0, 0, 0));
+		Instantiate (WhatToSpawn(), new Vector3 (x_position, y_position, -.5f), new Quaternion (0, 0, 0, 0));
+	}
+
+	GameObject WhatToSpawn() {
+		return whatToSpawn[Random.Range(0, whatToSpawn.Length)];
 	}
 }
