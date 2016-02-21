@@ -48,9 +48,11 @@ public class EnemyAI : MonoBehaviour {
 			break;
 		}
 
-		MoveToUnit ();
-		float distanceFromTarget = Vector3.Distance (transform.position, target.transform.position);
-		gun.isShooting = distanceFromTarget <= shootingDistance;
+		if (target != null) {
+			MoveToUnit ();
+			float distanceFromTarget = Vector3.Distance (transform.position, target.transform.position);
+			gun.isShooting = distanceFromTarget <= shootingDistance;
+		}
 	}
 
 	void MoveToUnit(){
@@ -69,8 +71,16 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	GameObject DetermineClosestUnit(){
-		var playerDistance = Vector3.Distance (transform.position, Player.transform.position);
-		var skynetDistance = Vector3.Distance (transform.position, Skynet.transform.position);
+		Vector3 playerPosition, skynetPostion;
+		float playerDistance = 0, skynetDistance = 0;
+		if (Player != null) {
+			playerPosition = Player.transform.position;
+			playerDistance = Vector3.Distance (transform.position, playerPosition);
+		}
+		if (Skynet != null) {
+			skynetPostion = Skynet.transform.position;
+			skynetDistance = Vector3.Distance (transform.position, skynetPostion);
+		}
 
 		if (playerDistance > skynetDistance) {
 			return Skynet;

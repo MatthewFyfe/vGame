@@ -5,6 +5,8 @@ using System.Collections;
 public class playerScore : MonoBehaviour {
 
 	public static int points = 0;
+	public bool gameOver = false;
+
 	float survivalTime;
 	int minutes, seconds;
 
@@ -19,18 +21,15 @@ public class playerScore : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//track a live clock and scoreboard
-		scoreText.text = "Score: " + points.ToString();
+		if (!gameOver) {
+			//track a live clock and scoreboard
+			scoreText.text = "Score: " + points.ToString ();
 
-		//get current game time in minutes:seconds
-		survivalTime = Time.time;
-		minutes = (int)survivalTime / 60;
-		seconds = (int)survivalTime % 60;
-		clockText.text = minutes.ToString("00") + ':' + seconds.ToString("00");
-	}
-
-	void gameOver()
-	{
-		//print a splash screen of points and time of match / game
+			//get current game time in minutes:seconds
+			survivalTime = Time.time;
+			minutes = (int)survivalTime / 60;
+			seconds = (int)survivalTime % 60;
+			clockText.text = minutes.ToString ("00") + ':' + seconds.ToString ("00");
+		}
 	}
 }
